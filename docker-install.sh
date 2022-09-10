@@ -64,5 +64,4 @@ run_cmd "make install" make install
 
 run_cmd "remove temp packages" apt-get remove -y $TEMP_PACKAGES
 run_cmd "remove unused packages" apt-get autoremove -y
-run_cmd "clean cache" apt-get clean
 run_cmd "remove tmp files" rm -rf /tmp/*
