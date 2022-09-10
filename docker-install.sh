@@ -23,7 +23,7 @@ function run_cmd() {
 
     ${@:2}
 
-    if $?
+    if [[ "$?" -eq "0" ]]
     then
         ok $1
         return
