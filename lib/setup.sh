@@ -24,7 +24,7 @@ then
     debug "🔒 Logging in to GitHub registry ..."
     if [ -z "${CR_PAT}" ]
     then
-        debug_fail "Missing \$CR_PAT env key"
+        debug_fail "Missing \$CR_PAT env key - See https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry"
         exit 1
     fi
 
