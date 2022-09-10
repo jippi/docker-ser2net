@@ -1,3 +1,5 @@
+set -e
+
 require_main
 
 ########################################################################
@@ -15,5 +17,3 @@ REPO_NAME_DOCKER_HUB=${REPO_NAME_DOCKER_HUB:-jippi/ser2net}
 
 # List of releases to skip
 SKIP=()
-
-mkdir -p ${DOCKER_CACHE_FOLDER}

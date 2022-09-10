@@ -1,3 +1,5 @@
+set -e
+
 function require_main() {
     if [ "${MAIN_LOADED}" != "1" ]; then
         echo "File should not be loaded or run directly, please use [./update.sh]"

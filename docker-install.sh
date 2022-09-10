@@ -2,8 +2,6 @@
 
 set -ex
 
-. /etc/lsb-release
-
 function begin() {
     debug "🚧 $@"
 }

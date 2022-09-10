@@ -1,3 +1,5 @@
+set -e
+
 require_main
 
 OUTPUT_PREFIX="[setup]"
