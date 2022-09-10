@@ -65,7 +65,7 @@ function docker_args_append_build_flags() {
     DOCKER_ARGS+=" --pull"
     DOCKER_ARGS+=" --push"
     DOCKER_ARGS+=" --builder ${DOCKER_BUILDX_NAME}"
-    DOCKER_ARGS+=" --platform linux/arm64,linux/amd64"
+    DOCKER_ARGS+=" --platform linux/amd64,linux/arm64,linux/arm/v7"
 
     if [ -e "${DOCKER_CACHE_FOLDER}/index.json" ]
     then
