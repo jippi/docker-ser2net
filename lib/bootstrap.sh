@@ -43,6 +43,11 @@ function load_file() {
 }
 
 function has_tag() {
+    if [ -z "${REBUILD_TAGS}" ]
+    then
+        return 1
+    fi
+
     check=$(echo "${DOCKER_TAGS}" | grep "^$1$")
     if [ "${check}" == "" ]; then
         return 1
