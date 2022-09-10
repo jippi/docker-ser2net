@@ -1,0 +1,10 @@
+version: '3.4'
+services:
+  ser2net:
+    image: $your_image_uri_here
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./ser2net.yaml:/etc/ser2net/ser2net.yaml
+    devices:
+      - /dev/ttyUSB0

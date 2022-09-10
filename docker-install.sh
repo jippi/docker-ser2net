@@ -1,0 +1,63 @@
+#!/bin/bash
+
+set -ex
+
+. /etc/lsb-release
+
+function begin() {
+    debug "🚧 $@"
+}
+
+function ok() {
+    echo "✅ $@"
+}
+
+function error() {
+    echo "❌ $@"
+}
+
+function run_cmd() {
+    begin $1
+
+    if ${@:2}
+    then
+        ok $1
+        return
+    fi
+
+    error $1
+}
+
+TEMP_PACKAGES="build-essential wget automake libtool openipmi make pkg-config"
+
+# command shortcuts
+APT_UPDATE="apt-get update --quiet"
+APT_INSTALL="apt-get install --no-install-recommends --yes"
+WGET="wget --quiet"
+
+# keep APT packages so buildkit can cache them instead
+rm -f /etc/apt/apt.conf.d/docker-clean
+
+# install basic packages needed
+run_cmd "apt-update" $APT_UPDATE
+run_cmd "apt-install" $APT_INSTALL $TEMP_PACKAGES tini
+
+ser2net_archive="/ser2net/cache/ser2net_${VERSION}.tar.gz"
+if [ ! -e "${ser2net_archive}" ]
+then
+    run_cmd "Downloading ser2net tar.gz archive" $WGET --output-document="${ser2net_archive}" "https://github.com/cminyard/ser2net/archive/refs/tags/v${VERSION}.tar.gz"
+else
+    ok "ser2net tar.gz archive file already exsist in ${ser2net_archive}"
+fi
+
+run_cmd "untar archive" tar zxfv ${ser2net_archive} -C /tmp
+cd /tmp/ser2net-${VERSION}
+run_cmd "run reconf" ./reconf
+run_cmd "configure "./configure --sysconfdir=/etc
+run_cmd "make" make
+run_cmd "make install" make install
+
+run_cmd "remove temp packages" apt-get remove -y $TEMP_PACKAGES
+run_cmd "remove unused packages" apt-get autoremove -y
+run_cmd "clean cache" apt-get clean
+run_cmd "remove tmp files" rm -rf /tmp/*
