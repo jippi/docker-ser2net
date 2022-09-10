@@ -14,6 +14,6 @@ REPO_NAME_ECR=${REPO_NAME_ECR:-i2s8u4z7/ser2net}
 REPO_NAME_DOCKER_HUB=${REPO_NAME_DOCKER_HUB:-jippi/ser2net}
 
 # List of releases to skip
-SKIP=(
-    1.29.2589.95 # this release do not ship binaries in github releases for some reason
-)
+SKIP=()
+
+mkdir -p ${DOCKER_CACHE_FOLDER}
