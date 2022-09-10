@@ -34,8 +34,7 @@ do
         continue
     fi
 
-
-    tag=${the_release}
+    tag="${the_release:1}"
     suffix=""
 
     OUTPUT_PREFIX="[${the_release}/default]"
