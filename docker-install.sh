@@ -18,20 +18,6 @@ function error() {
     echo "❌ $@"
 }
 
-function run_apt_cmd() {
-    local lock="/ser2net/cache/$1.lock"
-
-    until [ ! -e "$lock" ]
-    do
-        echo -n "."
-        sleep 1
-    done
-
-    touch $lock
-    run_cmd $@
-    rm $lock
-}
-
 function run_cmd() {
     begin $1
 
@@ -57,8 +43,8 @@ WGET="wget --quiet"
 rm -f /etc/apt/apt.conf.d/docker-clean
 
 # install basic packages needed
-run_apt_cmd "apt-update" $APT_UPDATE
-run_apt_cmd "apt-install" $APT_INSTALL $TEMP_PACKAGES tini
+run_cmd "apt-update" $APT_UPDATE
+run_cmd "apt-install" $APT_INSTALL $TEMP_PACKAGES tini
 
 ser2net_archive="/ser2net/cache/ser2net_${VERSION}.tar.gz"
 if [ ! -e "${ser2net_archive}" ]
@@ -75,7 +61,7 @@ run_cmd "configure "./configure --sysconfdir=/etc
 run_cmd "make" make
 run_cmd "make install" make install
 
-run_apt_cmd "remove temp packages" apt-get remove -y $TEMP_PACKAGES
-run_apt_cmd "remove unused packages" apt-get autoremove -y
-run_apt_cmd "clean cache" apt-get clean
+run_cmd "remove temp packages" apt-get remove -y $TEMP_PACKAGES
+run_cmd "remove unused packages" apt-get autoremove -y
+run_cmd "clean cache" apt-get clean
 run_cmd "remove tmp files" rm -rf /tmp/*
