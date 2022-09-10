@@ -35,8 +35,8 @@ function run_cmd() {
 TEMP_PACKAGES="build-essential wget automake libtool openipmi make pkg-config"
 
 # command shortcuts
-APT_UPDATE="apt-get -o DPkg::Lock::Timeout=-1 update --quiet"
-APT_INSTALL="apt-get -o DPkg::Lock::Timeout=-1 install --no-install-recommends --yes"
+APT_UPDATE="apt-get update --quiet"
+APT_INSTALL="apt-get install --no-install-recommends --yes"
 WGET="wget --quiet"
 
 # keep APT packages so buildkit can cache them instead
