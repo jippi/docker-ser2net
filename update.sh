@@ -52,7 +52,7 @@ do
         docker_args_append_build_flags $the_release
         docker_args_append_tag_flags $tag
 
-        if [ "${the_release}" == "${latest_release}" ]
+        if [ "v${the_release}" == "${latest_release}" ]
         then
             OUTPUT_PREFIX="[${the_release}/default/latest]"
 
