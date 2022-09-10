@@ -25,6 +25,8 @@ debug "latest tag will be ${latest_release}"
 
 for the_release in $github_releases
 do
+    the_release="${the_release:1}"
+
     OUTPUT_PREFIX="[${the_release}/default]"
 
     debug "Considering release"
@@ -34,7 +36,7 @@ do
         continue
     fi
 
-    tag="${the_release:1}"
+    tag="${the_release}"
     suffix=""
 
     OUTPUT_PREFIX="[${the_release}/default]"
