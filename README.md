@@ -14,8 +14,8 @@ Image tags with software specifications and version information can be found in 
 
 | **Tag**                   | **Version**                                                                 | **OS (Debian)**        | **Size**        |
 |-------------------------- |---------------------------------------------------------------------------- |----------------------- |---------------- |
-| `latest`                  | [latest †](https://github.com/cminyard/ser2net/releases/latest)             | bullseye (11.4)        | ~80 MB         |
-| `$version`                | `$version`                                                                  | bullseye (11.4)        | ~80 MB         |
+| `latest`                  | [latest †](https://github.com/cminyard/ser2net/releases/latest)             | bullseye (11.4)        | ~60 MB         |
+| `$version`                | `$version` (tag name minus the leading `v`)                                 | bullseye (11.4)        | ~60 MB         |
 
 _† Automation checks for new ser2net releases nightly (CEST, ~3am), so there might be a day or two latency for most recent release_
 
