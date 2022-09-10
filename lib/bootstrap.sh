@@ -78,8 +78,8 @@ function docker_args_append_build_flags() {
     then
         DOCKER_ARGS+=" --quiet"
     else
-        DOCKER_ARGS+=" --build-arg DEBUG=1"
         DOCKER_ARGS+=" --progress=plain"
+        DOCKER_ARGS+=" --build-arg DEBUG=${DEBUG}"
     fi
 
     DOCKER_ARGS+=" --build-arg BUILD_DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
