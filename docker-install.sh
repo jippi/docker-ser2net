@@ -3,7 +3,7 @@
 set -ex
 
 function begin() {
-    debug "🚧 $@"
+    echo "🚧 $@"
 }
 
 function ok() {
