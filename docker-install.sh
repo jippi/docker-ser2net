@@ -49,7 +49,8 @@ run_cmd "apt-install" $APT_INSTALL $TEMP_PACKAGES tini
 ser2net_archive="/ser2net/cache/ser2net_${VERSION}.tar.gz"
 if [ ! -e "${ser2net_archive}" ]
 then
-    run_cmd "Downloading ser2net tar.gz archive" $WGET --output-document="${ser2net_archive}" "https://github.com/cminyard/ser2net/archive/refs/tags/v${VERSION}.tar.gz"
+    download_url="https://github.com/cminyard/ser2net/archive/refs/tags/v${VERSION}.tar.gz"
+    run_cmd "Downloading ser2net tar.gz archive from ${download_url}" $WGET --output-document="${ser2net_archive}" ${download_url}
 else
     ok "ser2net tar.gz archive file already exsist in ${ser2net_archive}"
 fi
