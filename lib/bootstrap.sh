@@ -65,10 +65,12 @@ function docker_args_append_build_flags() {
     DOCKER_ARGS+=" --pull"
     DOCKER_ARGS+=" --push"
     DOCKER_ARGS+=" --builder ${DOCKER_BUILDX_NAME}"
+    DOCKER_ARGS+=" --platform linux/arm64/v8,linux/amd64"
     DOCKER_ARGS+=" --cache-from type=local,src=${DOCKER_CACHE_FOLDER}"
     DOCKER_ARGS+=" --cache-to   type=local,dest=${DOCKER_CACHE_FOLDER}"
 
-    if [ "${DEBUG}" == "0" ]; then
+    if [ "${DEBUG}" == "0" ]
+    then
         DOCKER_ARGS+=" --quiet"
     else
         DOCKER_ARGS+=" --progress=plain"
