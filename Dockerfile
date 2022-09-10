@@ -8,8 +8,8 @@ ARG DEBUG=0
 
 COPY --chown=root:root ["docker-install.sh", "/root"]
 
-RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
-    --mount=target=/var/cache/apt,type=cache,sharing=locked \
+RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=private \
+    --mount=target=/var/cache/apt,type=cache,sharing=private \
     --mount=target=/ser2net/cache,type=cache \
     bash /root/docker-install.sh && rm /root/docker-install.sh
 
