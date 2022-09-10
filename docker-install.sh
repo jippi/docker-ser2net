@@ -58,7 +58,7 @@ fi
 run_cmd "untar archive" tar zxfv ${ser2net_archive} -C /tmp
 cd /tmp/ser2net-${VERSION}
 run_cmd "run reconf" ./reconf
-run_cmd "configure "./configure --sysconfdir=/etc
+run_cmd "configure" ./configure --sysconfdir=/etc
 run_cmd "make" make
 run_cmd "make install" make install
 
