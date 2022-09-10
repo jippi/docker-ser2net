@@ -5,6 +5,7 @@ FROM debian:bullseye
 ARG DEBIAN_FRONTEND=noninteractive
 ARG VERSION=4.3.8
 ARG DEBUG=0
+ARG TARGETPLATFORM
 
 COPY --chown=root:root ["docker-install.sh", "/root"]
 
