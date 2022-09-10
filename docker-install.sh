@@ -21,7 +21,9 @@ function error() {
 function run_cmd() {
     begin $1
 
-    if ${@:2}
+    ${@:2}
+
+    if $?
     then
         ok $1
         return
