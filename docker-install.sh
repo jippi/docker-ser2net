@@ -44,7 +44,7 @@ rm -f /etc/apt/apt.conf.d/docker-clean
 
 # install basic packages needed
 run_cmd "apt-update" $APT_UPDATE
-run_cmd "apt-install" $APT_INSTALL $TEMP_PACKAGES tini
+run_cmd "apt-install" $APT_INSTALL $TEMP_PACKAGES tini ca-certificates
 
 ser2net_archive="/ser2net/cache/ser2net_${VERSION}.tar.gz"
 if [ ! -e "${ser2net_archive}" ]

@@ -41,6 +41,7 @@ fi
 # Create buildx context
 (
     docker buildx create --name $DOCKER_BUILDX_NAME --driver docker-container > /dev/null 2>&1 \
+    && docker run --rm --privileged multiarch/qemu-user-static --reset -p yes \
     && debug_complete "buildx container builder created"
 ) || debug_complete "buildx container builder exists"
 
