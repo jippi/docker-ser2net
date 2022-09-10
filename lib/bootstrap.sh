@@ -72,20 +72,13 @@ function docker_args_append_build_flags() {
     DOCKER_ARGS+=" --push"
     DOCKER_ARGS+=" --builder ${DOCKER_BUILDX_NAME}"
     DOCKER_ARGS+=" --platform linux/amd64,linux/arm64,linux/armhf"
-
-    if [ -e "${DOCKER_CACHE_FOLDER}/index.json" ]
-    then
-        DOCKER_ARGS+=" --cache-from type=local,src=${DOCKER_CACHE_FOLDER}"
-    fi
+    DOCKER_ARGS+=" --cache-from type=local,src=${DOCKER_CACHE_FOLDER}"
 
     DOCKER_ARGS+=" --cache-to   type=local,dest=${DOCKER_CACHE_FOLDER}"
 
-    if [ "${DEBUG}" == "0" ]
+    if [[ "${DEBUG}" -gt "0" ]]
     then
-        DOCKER_ARGS+=" --quiet"
-    else
         DOCKER_ARGS+=" --progress=plain"
-        DOCKER_ARGS+=" --build-arg DEBUG=${DEBUG}"
     fi
 
     DOCKER_ARGS+=" --build-arg BUILD_DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
