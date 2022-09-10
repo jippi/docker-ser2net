@@ -43,7 +43,7 @@ function load_file() {
 }
 
 function has_tag() {
-    if [ -z "${REBUILD_TAGS}" ]
+    if [ "${REBUILD_TAGS}" -eq "1" ]
     then
         return 1
     fi
