@@ -32,7 +32,7 @@ function run_cmd() {
     error $1
 }
 
-TEMP_PACKAGES="build-essential wget automake libtool openipmi make pkg-config"
+TEMP_PACKAGES="libgensio-dev libyaml-dev build-essential wget automake libtool openipmi make pkg-config"
 
 # command shortcuts
 APT_UPDATE="apt-get update --quiet"
