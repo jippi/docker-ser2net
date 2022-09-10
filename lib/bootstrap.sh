@@ -68,7 +68,7 @@ function docker_args_append_tag_flags() {
 }
 
 function docker_args_append_build_flags() {
-    DOCKER_ARGS+=" --pull"
+    # DOCKER_ARGS+=" --pull"
     DOCKER_ARGS+=" --push"
     DOCKER_ARGS+=" --builder ${DOCKER_BUILDX_NAME}"
     DOCKER_ARGS+=" --platform linux/amd64,linux/arm64,linux/armhf"
