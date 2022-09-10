@@ -10,6 +10,7 @@ function require_main() {
 require_main
 
 DEBUG=${DEBUG:0}
+REBUILD_TAGS=${REBUILD_TAGS:0}
 
 if [[ "${DEBUG}" -gt "1" ]]; then
     set -x
@@ -43,7 +44,7 @@ function load_file() {
 }
 
 function has_tag() {
-    if [ "${REBUILD_TAGS:0}" -eq "1" ]
+    if [ "${REBUILD_TAGS}" -eq "1" ]
     then
         return 1
     fi
