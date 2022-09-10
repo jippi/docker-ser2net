@@ -7,6 +7,7 @@ ARG VERSION=4.3.8
 ARG DEBUG=0
 
 COPY --chown=root:root ["docker-install.sh", "/root"]
+
 RUN --mount=target=/var/lib/apt/lists,type=cache \
     --mount=target=/var/cache/apt,type=cache \
     --mount=target=/ser2net/cache,type=cache \

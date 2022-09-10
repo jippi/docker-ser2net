@@ -58,5 +58,3 @@ debug_begin "Loading cminyard/ser2net releases"
 github_releases=$(curl -s https://api.github.com/repos/cminyard/ser2net/tags | jq -r '.[].name' | sort --reverse --numeric-sort | head -10)
 latest_release=$(echo "${github_releases}" | head -1)
 debug_complete "Loading cminyard/ser2net releases"
-
-mkdir -p ${DOCKER_CACHE_FOLDER}
