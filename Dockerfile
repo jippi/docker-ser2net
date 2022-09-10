@@ -8,9 +8,6 @@ ARG TARGETPLATFORM
 ARG VERSION=4.3.8
 ENV VERSION=${VERSION}
 
-ARG DEBUG=0
-ENV DEBUG=${DEBUG}
-
 COPY --chown=root:root ["docker-install.sh", "/root"]
 
 RUN --mount=id=apt-lists-${TARGETPLATFORM},target=/var/lib/apt/lists,type=cache \

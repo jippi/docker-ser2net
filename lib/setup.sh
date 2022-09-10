@@ -19,7 +19,7 @@ else
 fi
 
 # GitHub
-if ! curl -s -S --fail --header "Authorization: Bearer $(jq -r '.auths["'ghcr.io'"]["auth"]' ~/.docker/config.json)" "https://ghcr.io/v2/${REPO_NAME_GITHUB}/manifests/latest" > /dev/null
+if ! curl -s -S --fail --header "Authorization: Bearer $(jq -r '.auths["'ghcr.io'"]["auth"]' ~/.docker/config.json)" "https://ghcr.io/v2" > /dev/null
 then
     debug "🔒 Logging in to GitHub registry ..."
     if [ -z "${CR_PAT}" ]

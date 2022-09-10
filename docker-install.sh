@@ -1,9 +1,9 @@
 #!/bin/bash
 
-set -e
+set -ex
 
-if [[ "${DEBUG}" -gt "1" ]]; then
-    set -x
+if [[ "${DEBUG}" -eq "0" ]]; then
+    set +x
 fi
 
 function begin() {
