@@ -66,7 +66,12 @@ function docker_args_append_build_flags() {
     DOCKER_ARGS+=" --push"
     DOCKER_ARGS+=" --builder ${DOCKER_BUILDX_NAME}"
     DOCKER_ARGS+=" --platform linux/arm64/v8,linux/amd64"
-    DOCKER_ARGS+=" --cache-from type=local,src=${DOCKER_CACHE_FOLDER}"
+
+    if [ -e "${DOCKER_CACHE_FOLDER}/index.json" ]
+    then
+        DOCKER_ARGS+=" --cache-from type=local,src=${DOCKER_CACHE_FOLDER}"
+    fi
+
     DOCKER_ARGS+=" --cache-to   type=local,dest=${DOCKER_CACHE_FOLDER}"
 
     if [ "${DEBUG}" == "0" ]
