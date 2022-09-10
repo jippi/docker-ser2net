@@ -1,6 +1,10 @@
 #!/bin/bash
 
-set -ex
+set -e
+
+if [[ "${DEBUG}" -gt "1" ]]; then
+    set -x
+fi
 
 function begin() {
     echo "🚧 $@"

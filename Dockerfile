@@ -4,6 +4,7 @@ FROM debian:bullseye
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG VERSION=4.3.8
+ARG DEBUG=0
 
 COPY --chown=root:root ["docker-install.sh", "/root"]
 RUN --mount=target=/var/lib/apt/lists,type=cache \
