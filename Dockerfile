@@ -3,16 +3,19 @@
 FROM debian:bullseye
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG TARGETPLATFORM
+
 ARG VERSION=4.3.8
+ENV VERSION=${VERSION}}
+
 ARG DEBUG=0
 ENV DEBUG=${DEBUG}
-ARG TARGETPLATFORM
 
 COPY --chown=root:root ["docker-install.sh", "/root"]
 
 RUN --mount=id=apt-lists-${TARGETPLATFORM},target=/var/lib/apt/lists,type=cache \
     --mount=id=apt-cache-${TARGETPLATFORM},target=/var/cache/apt,type=cache \
-    --mount=target=/ser2net/cache,type=cache \
+    --mount=id=ser2net-cache-${TARGETPLATFORM},target=/ser2net/cache,type=cache \
     bash /root/docker-install.sh && rm /root/docker-install.sh
 
 ENTRYPOINT ["tini", "--", "ser2net", "-d", "-l", "-c", "/etc/ser2net/ser2net.yaml"]
