@@ -37,7 +37,7 @@ TEMP_PACKAGES="build-essential wget automake libtool openipmi make pkg-config"
 # command shortcuts
 APT_UPDATE="apt-get update --quiet"
 APT_INSTALL="apt-get install --no-install-recommends --yes"
-WGET="wget --quiet"
+WGET="wget"
 
 # keep APT packages so buildkit can cache them instead
 rm -f /etc/apt/apt.conf.d/docker-clean
