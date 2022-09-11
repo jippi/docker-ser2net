@@ -11,6 +11,7 @@ require_main
 
 DEBUG=${DEBUG:0}
 REBUILD_TAGS=${REBUILD_TAGS:0}
+NUMBER_OF_TAGS=${NUMBER_OF_TAGS:10}
 
 if [[ "${DEBUG}" -gt "1" ]]; then
     set -x
