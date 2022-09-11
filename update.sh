@@ -11,9 +11,9 @@ OUTPUT_PREFIX="[boot] "
 # Config
 ########################################################################
 
-DEBUG=${DEBUG:0}
-REBUILD_TAGS=${REBUILD_TAGS:0}
-NUMBER_OF_TAGS=${NUMBER_OF_TAGS-:10}
+DEBUG=${DEBUG:0-}
+REBUILD_TAGS=${REBUILD_TAGS:-0}
+NUMBER_OF_TAGS=${NUMBER_OF_TAGS:-10}
 
 ########################################################################
 # Load libraries
