@@ -6,13 +6,14 @@ set -o pipefail
 MAIN_LOADED=1
 ROOT_PATH="$( dirname -- "$0"; )";
 OUTPUT_PREFIX="[boot] "
+
 ########################################################################
 # Config
 ########################################################################
 
 DEBUG=${DEBUG:0}
 REBUILD_TAGS=${REBUILD_TAGS:0}
-NUMBER_OF_TAGS=${NUMBER_OF_TAGS:10}
+NUMBER_OF_TAGS=${NUMBER_OF_TAGS-:10}
 
 ########################################################################
 # Load libraries
