@@ -46,7 +46,7 @@ rm -f /etc/apt/apt.conf.d/docker-clean
 run_cmd "apt-update" $APT_UPDATE
 run_cmd "apt-install" $APT_INSTALL $TEMP_PACKAGES tini ca-certificates libgensio-dev libyaml-dev
 
-ser2net_archive="/ser2net/cache/ser2net_${VERSION}.tar.gz"
+ser2net_archive="/ser2net/cache/ser2net_v${VERSION}.tar.gz"
 if [ ! -e "${ser2net_archive}" ]
 then
     download_url="https://github.com/cminyard/ser2net/archive/refs/tags/v${VERSION}.tar.gz"
@@ -64,4 +64,4 @@ run_cmd "make install" make -j install
 
 run_cmd "remove temp packages" apt-get remove -y $TEMP_PACKAGES
 run_cmd "remove unused packages" apt-get autoremove -y
-run_cmd "remove tmp files" rm -rf /tmp/*
+run_cmd "remove tmp files" rm -rf /tmp/* ${ser2net_archive}
