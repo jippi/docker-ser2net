@@ -7,7 +7,7 @@
 All images are published to the following registries
 
 * 🥇 [GitHub](https://github.com/jippi/docker-ser2net/pkgs/container/docker-ser2net) as `ghcr.io/jippi/docker-ser2net` ⬅️ **Recommended**
-* 🥈 [AWS](https://gallery.ecr.aws/i2s8u4z7/ser2net) as `public.ecr.aws/i2s8u4z7/ser2net` ⬅️ Great alternative
+* 🥈 [AWS](https://gallery.ecr.aws/jippi/ser2net) as `public.ecr.aws/jippi/ser2net` ⬅️ Great alternative
 * ⚠️ [Docker Hub](https://hub.docker.com/r/jippi/ser2net/) as `jippi/docker-ser2net` ⬅️ Only use `:latest` as [tags might disappear](https://www.docker.com/blog/scaling-dockers-business-to-serve-millions-more-developers-storage/)
 
 Image tags with software specifications and version information can be found in the table below
