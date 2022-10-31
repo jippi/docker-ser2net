@@ -8,8 +8,11 @@ OUTPUT_PREFIX="[setup]"
 # Docker registry authentication
 ########################################################################
 
+set -e
+set -o pipefail
+
 # ECR
-if ! curl -s -S --fail --header "Authorization: Basic $(jq -r '.auths["'public.ecr.aws'"]["auth"]' ~/.docker/config.json)" public.ecr.aws/${PUBLIC_ECR_REGISTRY} > /dev/null
+if ! curl -s -S --fail --header "Authorization: Bearer $(jq -r '.auths["'public.ecr.aws'"]["auth"]' ~/.docker/config.json)" "https://public.ecr.aws/v2/${REPO_NAME_ECR}/manifests/latest" > /dev/null
 then
     debug "🔒 Logging in to AWS registry ..."
     aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/${PUBLIC_ECR_REGISTRY}
@@ -17,6 +20,7 @@ then
 else
     debug_complete "Already logged in to AWS registry"
 fi
+
 
 # GitHub
 if ! curl -s -S --fail --header "Authorization: Bearer $(jq -r '.auths["'ghcr.io'"]["auth"]' ~/.docker/config.json)" "https://ghcr.io/v2/" > /dev/null
