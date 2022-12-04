@@ -11,7 +11,7 @@ OUTPUT_PREFIX="[boot] "
 # Config
 ########################################################################
 
-DEBUG=${DEBUG:0-}
+DEBUG=${DEBUG:-0}
 REBUILD_TAGS=${REBUILD_TAGS:-0}
 NUMBER_OF_TAGS=${NUMBER_OF_TAGS:-10}
 
@@ -23,6 +23,11 @@ source "${ROOT_PATH}/lib/bootstrap.sh"
 
 load_file lib/config.sh
 load_file lib/setup.sh
+
+debug "Config:"
+debug " ROOT_PATH=${ROOT_PATH}"
+debug " REBUILD_TAGS=${REBUILD_TAGS}"
+debug " NUMBER_OF_TAGS=${NUMBER_OF_TAGS}"
 
 ########################################################################
 # Build docker images
@@ -69,7 +74,7 @@ do
         fi
 
         print "🚧 Building container image"
-        docker buildx build $DOCKER_ARGS .
+        docker buildx build $DOCKER_ARGS $ROOT_PATH
         print "✅ Done"
     else
         print "✅ Already build"
