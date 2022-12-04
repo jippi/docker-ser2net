@@ -56,6 +56,6 @@ debug_complete "Loading docker tags"
 
 # find latest relases from cminyard/ser2net repository
 debug_begin "Loading cminyard/ser2net releases"
-github_releases=$(curl -s https://api.github.com/repos/cminyard/ser2net/tags?per_page=${NUMBER_OF_TAGS} | jq -r '.[].name' | sort --reverse --numeric-sort)
+github_releases=$(curl -s https://api.github.com/repos/cminyard/ser2net/tags?per_page=${NUMBER_OF_TAGS} | jq -r '.[].name')
 latest_release=$(echo "${github_releases}" | head -1)
 debug_complete "Loading cminyard/ser2net releases"
