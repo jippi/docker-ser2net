@@ -30,6 +30,7 @@ function run_cmd() {
     fi
 
     error $1
+    return 1
 }
 
 TEMP_PACKAGES="build-essential wget automake libtool openipmi make pkg-config"
