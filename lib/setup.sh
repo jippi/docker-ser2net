@@ -11,18 +11,8 @@ OUTPUT_PREFIX="[setup]"
 set -e
 set -o pipefail
 
-# ECR
-if ! curl -s -S --fail --header "Authorization: Bearer $(jq -r '.auths["'public.ecr.aws'"]["auth"]' ~/.docker/config.json)" "https://public.ecr.aws/v2/${REPO_NAME_ECR}/manifests/latest" > /dev/null
-then
-    debug "🔒 Logging in to AWS registry ..."
-    aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/${PUBLIC_ECR_REGISTRY}
-    debug_complete "Login to AWS registry successful"
-else
-    debug_complete "Already logged in to AWS registry"
-fi
-
-
 # GitHub
+debug_begin "Checking GitHub login"
 if ! curl -s -S --fail --header "Authorization: Bearer $(jq -r '.auths["'ghcr.io'"]["auth"]' ~/.docker/config.json)" "https://ghcr.io/v2/" > /dev/null
 then
     debug "🔒 Logging in to GitHub registry ..."
@@ -37,6 +27,7 @@ then
 else
     debug_complete "Already logged in to GitHub registry"
 fi
+debug_complete "Checking GitHub login"
 
 ########################################################################
 # Build context
