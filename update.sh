@@ -25,6 +25,7 @@ load_file lib/config.sh
 load_file lib/setup.sh
 
 debug "Config:"
+debug " DEBUG=${DEBUG}"
 debug " ROOT_PATH=${ROOT_PATH}"
 debug " REBUILD_TAGS=${REBUILD_TAGS}"
 debug " NUMBER_OF_TAGS=${NUMBER_OF_TAGS}"
