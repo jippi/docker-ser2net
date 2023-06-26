@@ -1,4 +1,4 @@
-set -e
+set -o errexit -o nounset -o pipefail
 
 require_main
 
@@ -6,7 +6,7 @@ require_main
 # Config
 ########################################################################
 
-DOCKER_CACHE_FOLDER=${DOCKER_CACHE_FOLDER:-/tmp/ser2net-build-cache}
+DOCKER_CACHE_FOLDER=${DOCKER_CACHE_FOLDER:-/data/local/cache/ser2net-build-cache}
 DOCKER_BUILDX_NAME=${DOCKER_BUILDX_NAME:-ser2net-builder}
 PUBLIC_ECR_REGISTRY=${PUBLIC_ECR_REGISTRY:-jippi}
 

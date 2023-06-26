@@ -1,4 +1,4 @@
-set -e
+set -o errexit -o nounset -o pipefail
 
 function require_main() {
     if [ "${MAIN_LOADED}" != "1" ]; then
