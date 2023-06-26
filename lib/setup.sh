@@ -43,7 +43,7 @@ fi
 
 # Create buildx context
 (
-    docker buildx create --name $DOCKER_BUILDX_NAME --driver docker-container --driver-opt image=moby/buildkit:master > /dev/null 2>&1 \
+    docker buildx create --name "${DOCKER_BUILDX_NAME}" --driver docker-container --driver-opt image=moby/buildkit:master > /dev/null 2>&1 \
     && docker run --rm --privileged multiarch/qemu-user-static --reset -p yes \
     && debug_complete "buildx container builder created"
 ) || debug_complete "buildx container builder exists"
@@ -54,8 +54,24 @@ fi
 
 # find most recent docker tags from Docker Hub
 debug_begin "Loading docker tags"
-DOCKER_TAGS=$(curl -s "https://hub.docker.com/v2/repositories/${REPO_NAME_DOCKER_HUB}/tags/?page_size=100" | jq -r '.results[].name' | sort --numeric-sort)
-debug_complete "Loading docker tags"
+
+case $DOCKER_TAG_SOURCE in
+    "github")
+        DOCKER_TAGS=$(curl -s --header "Authorization: Bearer $(jq -r '.auths["'ghcr.io'"]["auth"]' ~/.docker/config.json)" "https://ghcr.io/v2/${REPO_NAME_GITHUB}/tags/list?n=100" | jq -r '.tags[]' | sort --numeric-sort)
+        ;;
+
+    "ecr")
+        DOCKER_TAGS=$(curl -s --header "Authorization: Bearer $(jq -r '.auths["'public.ecr.aws'"]["auth"]' ~/.docker/config.json)" "https://public.ecr.aws/v2/${REPO_NAME_ECR}/tags/list?n=100" | jq -r '.tags[]' | sort --numeric-sort)
+        ;;
+
+    "hub")
+        DOCKER_TAGS=$(curl -s "https://hub.docker.com/v2/repositories/${REPO_NAME_DOCKER_HUB}/tags/?page_size=100" | jq -r '.results[].name' | sort --numeric-sort)
+        ;;
+
+    *)
+        echo "Unknown DOCKER_TAG_SOURCE: ${DOCKER_TAG_SOURCE}"
+        exit 1
+esac
 
 # find latest relases from cminyard/ser2net repository
 debug_begin "Loading cminyard/ser2net releases"

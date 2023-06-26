@@ -1,17 +1,19 @@
 set -o errexit -o nounset -o pipefail
 
+if [[ "${DEBUG}" -eq "1" ]]
+then
+    set -x
+fi
+
 function require_main() {
-    if [ "${MAIN_LOADED}" != "1" ]; then
+    if [ "${MAIN_LOADED}" != "1" ]
+    then
         echo "File should not be loaded or run directly, please use [./update.sh]"
         exit 1
     fi
 }
 
 require_main
-
-if [[ "${DEBUG}" -gt "1" ]]; then
-    set -x
-fi
 
 function print() {
     echo $OUTPUT_PREFIX $@

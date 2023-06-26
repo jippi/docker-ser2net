@@ -5,7 +5,9 @@ require_main
 ########################################################################
 # Config
 ########################################################################
+DEBUG=${DEBUG:-0}
 
+DOCKER_TAG_SOURCE=${DOCKER_TAG_SOURCE:-hub}
 DOCKER_CACHE_FOLDER=${DOCKER_CACHE_FOLDER:-/data/local/cache/ser2net-build-cache}
 DOCKER_BUILDX_NAME=${DOCKER_BUILDX_NAME:-ser2net-builder}
 PUBLIC_ECR_REGISTRY=${PUBLIC_ECR_REGISTRY:-jippi}

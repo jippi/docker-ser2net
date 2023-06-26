@@ -1,8 +1,11 @@
 #!/bin/bash
 
-set -ex
+set -o errexit -o nounset -o pipefail
 
-if [[ "${DEBUG}" -eq "0" ]]; then
+DEBUG=${DEBUG:-0}
+
+if [[ "${DEBUG}" -eq "0" ]]
+then
     set +x
 fi
 
