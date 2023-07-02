@@ -2,6 +2,12 @@ set -o errexit -o nounset -o pipefail
 
 require_main
 
+# source optional env file
+if [ -e "${ROOT_PATH}/.env" ]
+then
+    source "${ROOT_PATH}/.env"
+fi
+
 ########################################################################
 # Config
 ########################################################################
