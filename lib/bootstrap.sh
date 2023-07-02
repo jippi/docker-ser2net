@@ -1,6 +1,12 @@
 set -o errexit -o nounset -o pipefail
 
-if [[ "${DEBUG}" -eq "1" ]]
+# source optional env file
+if [ -e "${ROOT_PATH}/.env" ]
+then
+    source "${ROOT_PATH}/.env"
+fi
+
+if [[ "${DEBUG}" -eq "2" ]]
 then
     set -x
 fi
