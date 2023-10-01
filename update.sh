@@ -74,6 +74,7 @@ do
         fi
 
         print "🚧 Building container image"
+        debug "$ docker buildx build $DOCKER_ARGS $ROOT_PATH"
         docker buildx build $DOCKER_ARGS $ROOT_PATH
         print "✅ Done"
     else
@@ -102,6 +103,4 @@ then
     else
         print "❌ \$DOCKER_CACHE_FOLDER [$DOCKER_CACHE_FOLDER] does not have an /ingest subfolder, might not be a cache folder after all?"
     fi
-else
-    print "❌ \$DOCKER_CACHE_FOLDER [$DOCKER_CACHE_FOLDER] is not a directory"
 fi

@@ -1,6 +1,6 @@
-# syntax=docker/dockerfile:1.4
+# syntax=docker/dockerfile:1
 
-FROM debian:bullseye
+FROM debian:stable
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG TARGETPLATFORM

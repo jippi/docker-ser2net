@@ -18,4 +18,6 @@ REPO_NAME_ECR=${REPO_NAME_ECR:-jippi/ser2net}
 REPO_NAME_DOCKER_HUB=${REPO_NAME_DOCKER_HUB:-jippi/ser2net}
 
 # List of releases to skip
-SKIP=()
+SKIP=(
+    4.3.13 # doesn't build at all for some reason
+)

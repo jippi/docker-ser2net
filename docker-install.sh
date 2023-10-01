@@ -37,6 +37,7 @@ function run_cmd() {
 }
 
 TEMP_PACKAGES="build-essential wget automake libtool openipmi make pkg-config"
+PERSISTENT_PACKAGES="tini ca-certificates libgensio-dev libyaml-dev"
 
 # command shortcuts
 APT_UPDATE="apt-get update --quiet"
@@ -48,7 +49,7 @@ rm -f /etc/apt/apt.conf.d/docker-clean
 
 # install basic packages needed
 run_cmd "apt-update" $APT_UPDATE
-run_cmd "apt-install" $APT_INSTALL $TEMP_PACKAGES tini ca-certificates libgensio-dev libyaml-dev
+run_cmd "apt-install" $APT_INSTALL $TEMP_PACKAGES $PERSISTENT_PACKAGES
 
 ser2net_archive="/ser2net/cache/ser2net_${VERSION}.tar.gz"
 if [ ! -e "${ser2net_archive}" ]
