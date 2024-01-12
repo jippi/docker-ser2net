@@ -4,8 +4,7 @@ set -o errexit -o nounset -o pipefail
 
 DEBUG=${DEBUG:-0}
 
-if [[ "${DEBUG}" -eq "0" ]]
-then
+if [[ "${DEBUG}" -eq "0" ]]; then
     set +x
 fi
 
@@ -26,8 +25,7 @@ function run_cmd() {
 
     ${@:2}
 
-    if [[ "$?" -eq "0" ]]
-    then
+    if [[ "$?" -eq "0" ]]; then
         ok $1
         return
     fi
@@ -52,8 +50,7 @@ run_cmd "apt-update" $APT_UPDATE
 run_cmd "apt-install" $APT_INSTALL $TEMP_PACKAGES $PERSISTENT_PACKAGES
 
 ser2net_archive="/ser2net/cache/ser2net_${VERSION}.tar.gz"
-if [ ! -e "${ser2net_archive}" ]
-then
+if [ ! -e "${ser2net_archive}" ]; then
     download_url="https://github.com/cminyard/ser2net/archive/refs/tags/v${VERSION}.tar.gz"
     run_cmd "Downloading ser2net tar.gz archive from ${download_url}" $WGET --output-document="${ser2net_archive}" ${download_url}
 else

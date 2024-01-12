@@ -3,7 +3,7 @@
 set -o errexit -o nounset -o pipefail
 
 MAIN_LOADED=1
-ROOT_PATH="$( dirname -- "$0"; )";
+ROOT_PATH="$(dirname -- "$0")"
 OUTPUT_PREFIX="[boot] "
 
 ########################################################################
@@ -36,16 +36,14 @@ debug " NUMBER_OF_TAGS=${NUMBER_OF_TAGS}"
 debug "github tags: $(echo $github_releases | xargs)"
 debug "latest tag will be ${latest_release}"
 
-for the_release in $github_releases
-do
+for the_release in $github_releases; do
     the_release="${the_release:1}"
 
     OUTPUT_PREFIX="[${the_release}/default]"
 
     debug "Considering release"
-    if [[ " ${SKIP[*]} " =~ " ${the_release} " ]]
-    then
-        print "Skipping ....";
+    if [[ " ${SKIP[*]} " =~ " ${the_release} " ]]; then
+        print "Skipping ...."
         continue
     fi
 
@@ -59,14 +57,12 @@ do
     # Default build
     ####################################################################################
 
-    if ! has_tag $tag
-    then
+    if ! has_tag $tag; then
         docker_args_reset
         docker_args_append_build_flags $the_release
         docker_args_append_tag_flags $tag
 
-        if [ "v${the_release}" == "${latest_release}" ]
-        then
+        if [ "v${the_release}" == "${latest_release}" ]; then
             OUTPUT_PREFIX="[${the_release}/default/latest]"
 
             print "🏷️  Tagging as latest"
@@ -83,20 +79,17 @@ do
 
 done
 
-if [ "$DEBUG" != "0" ]
-then
+if [ "$DEBUG" != "0" ]; then
     debug_complete "Not flushing caches in debug mode"
     exit 0
 fi
 
 print "🚧 Pruning buildx caches"
-docker buildx prune --all --force --builder $DOCKER_BUILDX_NAME
+docker buildx inspect --bootstrap "${DOCKER_BUILDX_NAME}" >/dev/null && docker buildx prune --all --force --builder "${DOCKER_BUILDX_NAME}"
 print "✅ Done"
 
-if [ -d "${DOCKER_CACHE_FOLDER}" ]
-then
-    if [ -d "${DOCKER_CACHE_FOLDER}/ingest" ]
-    then
+if [ -d "${DOCKER_CACHE_FOLDER}" ]; then
+    if [ -d "${DOCKER_CACHE_FOLDER}/ingest" ]; then
         print "🚧 Pruning buildx exports"
         rm -rf -v "${DOCKER_CACHE_FOLDER}"
         print "✅ Done"
