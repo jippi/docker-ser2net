@@ -11,6 +11,9 @@ declare -gxri REBUILD_TAGS=${REBUILD_TAGS:-0}
 declare -gxri NUMBER_OF_TAGS=${NUMBER_OF_TAGS:-10}
 
 declare -gx OUTPUT_PREFIX="[boot] "
+declare -gx BUILD_DATE
+BUILD_DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+
 declare -gxr DOCKER_TAG_SOURCE=${DOCKER_TAG_SOURCE:-hub}
 declare -gxr DOCKER_CACHE_FOLDER=${DOCKER_CACHE_FOLDER:-/data/local/cache/ser2net-build-cache}
 declare -gxr DOCKER_BUILDX_NAME=${DOCKER_BUILDX_NAME:-ser2net-builder}

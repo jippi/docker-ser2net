@@ -61,14 +61,18 @@ function docker_args_append_build_flags() {
     DOCKER_ARGS+=(--pull)
     DOCKER_ARGS+=(--push)
     DOCKER_ARGS+=(--builder "${DOCKER_BUILDX_NAME}")
-    DOCKER_ARGS+=(--platform "linux/amd64,linux/arm64,linux/armhf")
+    DOCKER_ARGS+=(--sbom true)
+    DOCKER_ARGS+=(--attest "type=provenance,mode=max")
+    DOCKER_ARGS+=(--platform "linux/amd64,linux/arm64,linux/386,linux/arm/v7,linux/arm/v6")
     DOCKER_ARGS+=(--cache-to "type=local,dest=${DOCKER_CACHE_FOLDER}")
     DOCKER_ARGS+=(--cache-from "type=local,src=${DOCKER_CACHE_FOLDER}")
 
     if [[ "${DEBUG}" -gt "0" ]]; then
         DOCKER_ARGS+=(--progress=plain)
+    else
+        DOCKER_ARGS+=(--quiet)
     fi
 
-    DOCKER_ARGS+=(--build-arg "BUILD_DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)")
+    DOCKER_ARGS+=(--build-arg "BUILD_DATE=${BUILD_DATE:?}")
     DOCKER_ARGS+=(--build-arg "VERSION=$1")
 }
