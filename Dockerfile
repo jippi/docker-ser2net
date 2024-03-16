@@ -17,7 +17,7 @@ COPY --chown=root:root ["docker-install.sh", "/root"]
 
 RUN --mount=type=cache,id=ser2net-apt-lists-${TARGETPLATFORM},target=/var/lib/apt/lists \
     --mount=type=cache,id=ser2net-apt-cache-${TARGETPLATFORM},target=/var/cache/apt \
-    --mount=type=cache,id=ser2net-cache,target=/ser2net/cache,sharing=shared \
+    --mount=type=cache,id=ser2net-source-cache-${TARGETPLATFORM},target=/ser2net/cache \
     set -ex \
     && bash /root/docker-install.sh \
     && rm /root/docker-install.sh

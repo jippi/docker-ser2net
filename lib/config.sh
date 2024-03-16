@@ -28,3 +28,17 @@ declare -gxr REPO_NAME_DOCKER_HUB=${REPO_NAME_DOCKER_HUB:-jippi/ser2net}
 declare -gxrA SKIP=(
     [4.3.13]="doesn't build at all for some reason"
 )
+
+# Docker platforms to build the multi-arch image for
+declare -gxra BUILD_PLATFORMS=(
+    linux/386
+    linux/amd64
+    linux/amd64/v2
+    linux/amd64/v3
+    linux/amd64/v4
+    linux/arm/v6
+    linux/arm/v7
+    linux/arm/v8
+    linux/arm64
+    linux/arm64/v8
+)
