@@ -1,23 +1,27 @@
-set -o errexit -o nounset -o pipefail
+# shellcheck shell=bash
 
-require_main
+set -o errexit -o nounset -o pipefail
 
 ########################################################################
 # Config
 ########################################################################
-DEBUG=${DEBUG:-0}
 
-DOCKER_TAG_SOURCE=${DOCKER_TAG_SOURCE:-hub}
-DOCKER_CACHE_FOLDER=${DOCKER_CACHE_FOLDER:-/data/local/cache/ser2net-build-cache}
-DOCKER_BUILDX_NAME=${DOCKER_BUILDX_NAME:-ser2net-builder}
-PUBLIC_ECR_REGISTRY=${PUBLIC_ECR_REGISTRY:-jippi}
+declare -gxri DEBUG=${DEBUG:-0}
+declare -gxri REBUILD_TAGS=${REBUILD_TAGS:-0}
+declare -gxri NUMBER_OF_TAGS=${NUMBER_OF_TAGS:-10}
+
+declare -gx OUTPUT_PREFIX="[boot] "
+declare -gxr DOCKER_TAG_SOURCE=${DOCKER_TAG_SOURCE:-hub}
+declare -gxr DOCKER_CACHE_FOLDER=${DOCKER_CACHE_FOLDER:-/data/local/cache/ser2net-build-cache}
+declare -gxr DOCKER_BUILDX_NAME=${DOCKER_BUILDX_NAME:-ser2net-builder}
+declare -gxr PUBLIC_ECR_REGISTRY=${PUBLIC_ECR_REGISTRY:-jippi}
 
 # Repository names
-REPO_NAME_GITHUB=${REPO_NAME_GITHUB:-jippi/docker-ser2net}
-REPO_NAME_ECR=${REPO_NAME_ECR:-jippi/ser2net}
-REPO_NAME_DOCKER_HUB=${REPO_NAME_DOCKER_HUB:-jippi/ser2net}
+declare -gxr REPO_NAME_GITHUB=${REPO_NAME_GITHUB:-jippi/docker-ser2net}
+declare -gxr REPO_NAME_ECR=${REPO_NAME_ECR:-jippi/ser2net}
+declare -gxr REPO_NAME_DOCKER_HUB=${REPO_NAME_DOCKER_HUB:-jippi/ser2net}
 
 # List of releases to skip
-SKIP=(
-    4.3.13 # doesn't build at all for some reason
+declare -gxrA SKIP=(
+    [4.3.13]="doesn't build at all for some reason"
 )
