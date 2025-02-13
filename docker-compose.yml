@@ -1,7 +1,6 @@
-version: '3.4'
 services:
   ser2net:
-    image: $your_image_uri_here
+    image: ghcr.io/jippi/docker-ser2net:latest
     network_mode: host
     restart: unless-stopped
     volumes:
